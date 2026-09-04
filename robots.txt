@@ -1,0 +1,7 @@
+# https://paleskies.matri6.com/
+# Everything that renders the site is crawlable: CSS, JS, fonts, images, video.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://paleskies.matri6.com/sitemap.xml

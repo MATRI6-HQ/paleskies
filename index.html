@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en" class="no-js">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paleskies | AI Image &amp; Video Generation Platform for Brands</title>
+  <meta name="description"
+    content="Paleskies fine-tunes AI models to generate on-brand images and video inside templates you define. You pick the engine on every run." />
+  <link rel="canonical" href="https://paleskies.matri6.com/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#091008" />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico?v=1" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=1" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png?v=1" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=1" />
+
+  <!-- Link preview (Open Graph / Twitter Card) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Paleskies" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://paleskies.matri6.com/" />
+  <meta property="og:title" content="Paleskies | AI Image &amp; Video Generation Platform for Brands" />
+  <meta property="og:description"
+    content="Fine-tuned AI models generating on-brand images and video inside your templates. Choose your engine: Paleskies in-house, Seedance, Kling or Wan." />
+  <meta property="og:image" content="https://paleskies.matri6.com/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"
+    content="Paleskies: A clearer view of what is Possible. AI image and video generation." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Paleskies | AI Image &amp; Video Generation Platform for Brands" />
+  <meta name="twitter:description"
+    content="Fine-tuned AI models generating on-brand images and video inside your templates. Choose your engine: Paleskies in-house, Seedance, Kling or Wan." />
+  <meta name="twitter:image" content="https://paleskies.matri6.com/og-image.jpg" />
+  <meta name="twitter:image:alt"
+    content="Paleskies: A clearer view of what is Possible. AI image and video generation." />
+
+  <!-- Fonts are self-hosted (see fonts/): same faces as before, but no third-party
+       stylesheet in the critical path and no request to a font CDN on page load. -->
+  <link rel="preload" href="fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/dm-sans-var.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/dm-mono-500.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    /* One backdrop per visit, chosen before .scene is parsed so only the picked image is ever fetched.
+       Runs here rather than in script.js: by the end of <body> the default image is already downloading. */
+    document.documentElement.classList.remove('no-js');
+    // Every load starts at the top: drop any restored scroll offset, and strip a #hash before
+    // the browser can jump to it. In-page anchor clicks still work, since they happen after load.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    (() => {
+      const TOTAL = 7; // how many images/N.webp exist. Bump this when you add or remove one
+      const KEY = 'paleskies-backdrop';
+      const apply = (src) => document.documentElement.style.setProperty('--background-image', `url("${src}")`);
+      let last = 0;
+      try { last = Number(localStorage.getItem(KEY)) || 0; } catch (error) { /* storage blocked */ }
+      let pick;
+      if (last >= 1 && last <= TOTAL) {
+        pick = Math.floor(Math.random() * (TOTAL - 1)) + 1;
+        if (pick >= last) pick += 1; // step over last visit's image so a reload always changes
+      } else {
+        pick = Math.floor(Math.random() * TOTAL) + 1;
+      }
+      apply(`images/${pick}.webp`);
+      try { localStorage.setItem(KEY, pick); } catch (error) { /* storage blocked */ }
+      // .scene does not exist until <body> is parsed, so the backdrop would otherwise
+      // queue behind the fonts. Preloading here starts it as soon as it is chosen.
+      const hint = document.createElement('link');
+      hint.rel = 'preload';
+      hint.as = 'image';
+      hint.href = `images/${pick}.webp`;
+      hint.fetchPriority = 'high';
+      document.head.appendChild(hint);
+      // Two fallbacks in one probe: a browser too old for WebP, and a TOTAL that has
+      // drifted past the real file count. Either way we end up with a painted backdrop.
+      const probe = new Image();
+      probe.onerror = () => {
+        const png = new Image();
+        png.onerror = () => apply('images/1.png');
+        png.onload = () => apply(`images/${pick}.png`);
+        png.src = `images/${pick}.png`;
+      };
+      probe.src = `images/${pick}.webp`;
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://paleskies.matri6.com/#organization",
+        "name": "Paleskies",
+        "url": "https://paleskies.matri6.com/",
+        "description": "Paleskies builds and operates an AI platform that generates on-brand images and video for brands.",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://paleskies.matri6.com/Full_Logo.jpg",
+          "width": 1365,
+          "height": 768
+        },
+        "email": "hq@matri6.com",
+        "parentOrganization": { "@type": "Organization", "name": "MATRI6", "url": "https://matri6.com" },
+        "sameAs": [
+          "https://instagram.com/matri6.hq",
+          "https://linkedin.com/company/matri6",
+          "https://discord.gg/sTztxzJSG9"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://paleskies.matri6.com/#website",
+        "url": "https://paleskies.matri6.com/",
+        "name": "Paleskies",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://paleskies.matri6.com/#organization" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://paleskies.matri6.com/#webpage",
+        "url": "https://paleskies.matri6.com/",
+        "name": "Paleskies | AI Image & Video Generation Platform for Brands",
+        "description": "Paleskies fine-tunes AI models to generate on-brand images and video inside templates brands define, with a user-selectable generation engine and PM/QA oversight.",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://paleskies.matri6.com/#website" },
+        "about": { "@id": "https://paleskies.matri6.com/#platform" },
+        "primaryImageOfPage": { "@type": "ImageObject", "url": "https://paleskies.matri6.com/og-image.jpg" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://paleskies.matri6.com/#platform",
+        "name": "Paleskies",
+        "url": "https://paleskies.matri6.com/",
+        "applicationCategory": "MultimediaApplication",
+        "applicationSubCategory": "AI image and video generation",
+        "operatingSystem": "Web",
+        "description": "An AI image and video generation platform. Brands define templates that fix framing, composition, pacing and product handling; fine-tuned models generate inside those constraints, with the generation engine selectable per run and PM/QA review. In-house models built in India are in development.",
+        "featureList": [
+          "Image and video generation",
+          "Brand-defined generation templates",
+          "User-selectable generation engine: Paleskies in-house, Seedance, Kling, Wan",
+          "PM and QA review layer",
+          "Multi-tenant access with role-based permissions",
+          "Append-only audit logging",
+          "API access on the Enterprise plan"
+        ],
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Pro",
+            "price": "19",
+            "priceCurrency": "USD",
+            "description": "For individual brands and small teams getting started.",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "19",
+              "priceCurrency": "USD",
+              "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitCode": "MON" }
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Ultra",
+            "price": "39",
+            "priceCurrency": "USD",
+            "description": "For growing brands with higher creative output needs.",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "39",
+              "priceCurrency": "USD",
+              "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitCode": "MON" }
+            }
+          }
+        ],
+        "publisher": { "@id": "https://paleskies.matri6.com/#organization" }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div class="scene" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <!-- Decorative: the page content behind it is already in the accessibility tree. -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <span class="loader-word">PALESKIES</span>
+  </div>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Paleskies home">PALESKIES</a>
+    <nav class="site-nav" id="site-nav" aria-label="Sections">
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#platform">Platform</a></li>
+        <li><a href="#output">Output</a></li>
+        <li><a href="#enterprise">Enterprise</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero section" id="top" aria-labelledby="hero-title">
+      <div class="hero-panel glass reveal">
+        <div class="hero-copy-block">
+          <p class="eyebrow">AI image &amp; video generation platform</p>
+          <h1 id="hero-title">A clearer view of<br />what is <em>Possible.</em></h1>
+          <p class="hero-copy">Fine-tuned AI models generating on-brand images and video inside templates
+            you define, with our own India-built models in development.</p>
+          <div class="button-row">
+            <a class="button button-solid" href="#contact">Request platform access <span aria-hidden="true">↗</span></a>
+            <a class="button button-quiet" href="#platform">How it works <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about section" id="about" aria-labelledby="about-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">About</p>
+        <h2 id="about-title">India to<br /><em>the World!</em></h2>
+      </div>
+      <div class="about-copy glass reveal">
+        <p>Paleskies builds and operates an AI platform that generates images and video for brands. The
+          platform is the thing we make, sell and run. It is not work we perform on a brand's behalf.</p>
+        <p>The premise is deliberately narrow. Brands usually know what their work needs to look like;
+          what they lack is a way to produce it at the volume their channels demand without handing the
+          look over to a general-purpose model. Paleskies inverts that. The brand supplies the
+          template: the framing, the composition, the pacing, the constraints. Generation happens
+          inside it.</p>
+        <p>Today that generation runs on existing AI models we fine-tune for brand work, and the engine
+          is yours to pick on any given run: the Paleskies in-house models, Seedance, Kling or Wan. Our
+          own image and video models, built in India, are in active development. As they ship they join
+          the same list as another engine you can select.</p>
+      </div>
+    </section>
+
+    <section class="platform section" id="platform" aria-labelledby="platform-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Platform</p>
+        <h2 id="platform-title">How it <em>works.</em></h2>
+      </div>
+      <div class="platform-grid">
+        <article class="capability glass reveal"><span>01</span>
+          <h3>Brand-defined templates</h3>
+          <p>A template fixes what must not drift: framing, composition, pacing, type treatment, product
+            handling. Generation happens inside those constraints, so images and video hold their shape
+            across every run instead of varying one to the next.</p>
+        </article>
+        <article class="capability glass reveal"><span>02</span>
+          <h3>Choose your engine</h3>
+          <p>Model selection is yours, run by run: the Paleskies in-house models, Seedance, Kling or Wan.
+            Generate the same template through different engines and keep the one that reads best. Our
+            India-built models join the list as they ship.</p>
+        </article>
+        <article class="capability glass reveal"><span>03</span>
+          <h3>PM &amp; QA oversight</h3>
+          <p>Images and video pass through a review layer before they reach a brand team. Project
+            management and quality assurance are part of the platform, not a step bolted on at delivery.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="work section" id="output" aria-labelledby="output-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Output</p>
+        <h2 id="output-title">Made to <em>stay...</em></h2>
+        <p class="section-intro">Video samples generated on the platform across common product
+          categories. The platform produces stills as well. These are platform output, not client
+          campaigns.</p>
+      </div>
+      <div class="reel-grid">
+        <article class="reel-card reel-one reveal">
+          <div class="reel-visual">
+            <!-- SAMPLE 01 · Smart watch -->
+            <video class="reel-video" data-src="videos/watch.mp4" data-poster=""
+              aria-label="Generated sample: a smart watch turning above a lunar surface" muted loop playsinline
+              preload="none"></video>
+            <span class="reel-mark">01</span>
+          </div>
+          <div class="reel-meta">
+            <h3>Smart watch</h3>
+          </div>
+          <button class="sound-toggle" type="button" aria-label="Enable sound for the smart watch sample"
+            aria-pressed="false"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><span
+              class="sound-label">Sound</span></button>
+        </article>
+        <article class="reel-card reel-two reveal">
+          <div class="reel-visual">
+            <!-- SAMPLE 02 · Beverage -->
+            <video class="reel-video" data-src="videos/bottle.mp4" data-poster=""
+              aria-label="Generated sample: a lemon water bottle suspended against blue" muted loop playsinline
+              preload="none"></video>
+            <span class="reel-mark">02</span>
+          </div>
+          <div class="reel-meta">
+            <h3>Beverage</h3>
+          </div>
+          <button class="sound-toggle" type="button" aria-label="Enable sound for the beverage sample"
+            aria-pressed="false"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><span
+              class="sound-label">Sound</span></button>
+        </article>
+        <article class="reel-card reel-three reveal">
+          <div class="reel-visual">
+            <!-- SAMPLE 03 · Footwear -->
+            <video class="reel-video" data-src="videos/shoes.mp4" data-poster=""
+              aria-label="Generated sample: a sneaker turning against a slate backdrop" muted loop playsinline
+              preload="none"></video>
+            <span class="reel-mark">03</span>
+          </div>
+          <div class="reel-meta">
+            <h3>Footwear</h3>
+          </div>
+          <button class="sound-toggle" type="button" aria-label="Enable sound for the footwear sample"
+            aria-pressed="false"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><span
+              class="sound-label">Sound</span></button>
+        </article>
+        <article class="reel-card reel-four reveal">
+          <div class="reel-visual">
+            <!-- SAMPLE 04 · Eyewear -->
+            <video class="reel-video" data-src="videos/sunglasses.mp4" data-poster=""
+              aria-label="Generated sample: round sunglasses lit in warm shadow" muted loop playsinline
+              preload="none"></video>
+            <span class="reel-mark">04</span>
+          </div>
+          <div class="reel-meta">
+            <h3>Eyewear</h3>
+          </div>
+          <button class="sound-toggle" type="button" aria-label="Enable sound for the eyewear sample"
+            aria-pressed="false"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><span
+              class="sound-label">Sound</span></button>
+        </article>
+      </div>
+      <!-- PLACEHOLDER · Case studies. Nothing goes here until a customer has cleared being named.
+           Do not populate with example brands: everything above is platform output, not client work. -->
+    </section>
+
+    <section class="principles section" id="enterprise" aria-labelledby="enterprise-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Enterprise</p>
+        <h2 id="enterprise-title">Built for<br /><em>brand teams.</em></h2>
+      </div>
+      <div class="principle-grid">
+        <article class="principle glass reveal"><span>01</span>
+          <h3>Multi-tenant access</h3>
+          <p>Each organisation works in its own tenant. Role-based permissions decide who can author
+            templates, who can generate against them, and who can only review.</p>
+        </article>
+        <article class="principle glass reveal"><span>02</span>
+          <h3>Invite-only onboarding</h3>
+          <p>Accounts are provisioned by invitation rather than self-signup, so a brand controls exactly
+            who inside it can produce work under its templates.</p>
+        </article>
+        <article class="principle glass reveal"><span>03</span>
+          <h3>Audit logging</h3>
+          <p>Generation runs, template changes and access events are written to an append-only log.
+            Entries cannot be edited or deleted from within the product.</p>
+        </article>
+        <article class="principle glass reveal"><span>04</span>
+          <h3>Dedicated onboarding</h3>
+          <p>Enterprise accounts are set up with us directly, with templates built and validated against
+            the brand's existing work before the first production run.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="pricing section" id="pricing" aria-labelledby="pricing-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Pricing</p>
+        <h2 id="pricing-title">Plans that <em>scale.</em></h2>
+        <p class="section-intro">Each plan includes a monthly credit allowance. Every image or video
+          generation draws credits from it.</p>
+      </div>
+      <div class="pricing-grid">
+        <article class="tier glass reveal"><span>01</span>
+          <h3>Pro</h3>
+          <p class="tier-price">$19<span>/month</span></p>
+          <p class="tier-for">For individual brands and small teams getting started.</p>
+          <ul class="tier-features">
+            <li>Access to Paleskies in-house models</li>
+            <li>1,000 credits/month (covers image and video generations)</li>
+            <li>Standard rendering queue</li>
+            <li>Basic template library</li>
+            <li>Email support</li>
+          </ul>
+          <a class="button button-quiet" href="#contact">Get started <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="tier glass reveal"><span>02</span>
+          <h3>Ultra</h3>
+          <p class="tier-price">$39<span>/month</span></p>
+          <p class="tier-for">For growing brands with higher creative output needs.</p>
+          <ul class="tier-features">
+            <li>Everything in Pro</li>
+            <li>Access to all models: Paleskies in-house, Seedance, Kling and Wan</li>
+            <li>5,000 credits/month (covers image and video generations)</li>
+            <li>Priority rendering queue</li>
+            <li>Custom templates</li>
+            <li>Priority support</li>
+          </ul>
+          <a class="button button-solid" href="#contact">Get started <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="tier glass reveal"><span>03</span>
+          <h3>Enterprise</h3>
+          <p class="tier-price is-word">Custom</p>
+          <p class="tier-for">For organisations that need scale, control and oversight.</p>
+          <ul class="tier-features">
+            <li>Everything in Ultra</li>
+            <li>Custom monthly credit allowance based on volume needs</li>
+            <li>Multi-tenant access with role-based permissions</li>
+            <li>Dedicated onboarding and PM/QA oversight layer</li>
+            <li>Custom templates built to spec</li>
+            <li>API access</li>
+            <li>Audit logging</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <a class="button button-quiet" href="#contact">Contact us <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="announcement section">
+      <div class="announcement-box glass reveal">
+        <p>Our own image and video models, built in India, are in active development and coming soon.</p>
+      </div>
+    </section>
+
+    <!-- PLACEHOLDER · Customer quotes. Styles for this block live under "Testimonials" in style.css.
+         Leave empty until a named customer has approved their quote and attribution in writing. -->
+
+    <section class="contact section" id="contact" aria-labelledby="contact-title">
+      <div class="contact-info reveal">
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title">Request<br />platform <em>access.</em></h2>
+        <p>Tell us what you want to produce and which plan fits. We will follow up to get you set
+          up.</p>
+        <div class="contact-links"><a href="mailto:hq@matri6.com">hq@matri6.com</a><span>India / Everywhere</span></div>
+      </div>
+      <!-- Formspree endpoint. method/action are set here so the form still submits if JavaScript never runs. -->
+      <form class="contact-form glass reveal" id="contact-form" action="https://formspree.io/f/xdaqbknq" method="POST">
+        <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required />
+        </div>
+        <div class="field"><label for="email">Work email</label><input id="email" name="email" type="email"
+            autocomplete="email" required /></div>
+        <div class="field"><label for="company">Company <span>Optional</span></label><input id="company" name="company"
+            autocomplete="organization" /></div>
+        <div class="field"><label for="message">What you are looking to produce</label><textarea id="message"
+            name="message" rows="4" required></textarea></div>
+        <input type="hidden" name="_subject" value="New platform access request from the Paleskies site" />
+        <input class="honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button class="button button-solid submit" type="submit">Send request <span
+            aria-hidden="true">↗</span></button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-social"><a href="https://instagram.com/matri6.hq" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://linkedin.com/company/matri6" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://discord.gg/sTztxzJSG9" target="_blank" rel="noopener">Discord</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <a class="footer-mark" href="#top">PALESKIES</a>
+    <p>© <span id="year"></span> <a href="https://matri6.com" target="_blank" rel="noopener">MATRI6</a><br />All rights
+      reserved.</p>
+  </footer>
+  <script src="script.js" defer></script>
+</body>
+
+</html>
